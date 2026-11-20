@@ -1,0 +1,22 @@
+# 4SONS – Apache rules (works on most shared hosting / cPanel)
+Options -Indexes
+ErrorDocument 404 /404.php
+
+# Block direct web access to private folders and sensitive files
+RedirectMatch 403 ^/(includes|data)(/|$)
+<FilesMatch "\.(sqlite|sqlite3|db|sql|log|md|local\.php)$">
+  Require all denied
+</FilesMatch>
+<FilesMatch "^config\.(local|sample)\.php$">
+  Require all denied
+</FilesMatch>
+
+# Never execute scripts from the uploads folder
+<IfModule mod_php.c>
+  php_flag engine off
+</IfModule>
+
+# Force HTTPS once your SSL certificate is active (uncomment the 3 lines)
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

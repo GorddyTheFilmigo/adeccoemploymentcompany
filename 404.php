@@ -1,0 +1,3 @@
+<?php
+require __DIR__ . '/includes/bootstrap.php';
+fail_page(404, 'Page not found', 'The page you are looking for does not exist.');
